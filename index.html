@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6256c9">
+  <title>Air Aware | Community Air Quality</title>
+
+  <style>
+    :root {
+      --purple: #6256c9;
+      --purple-dark: #43389b;
+      --blue: #4799e8;
+      --lavender: #eeeaff;
+      --pale-blue: #eaf4ff;
+      --background: #f6f5ff;
+      --text: #292747;
+      --muted: #77758f;
+      --white: #ffffff;
+      --border: #e5e2f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, #6256c9, #478fe0);
+      color: white;
+      text-align: center;
+      padding: 32px 18px 28px;
+      border-radius: 0 0 26px 26px;
+      box-shadow: 0 6px 22px #6256c925;
+    }
+
+    .brand {
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin: 0;
+    }
+
+    .brand-icon {
+      display: inline-block;
+      margin-right: 7px;
+    }
+
+    header p {
+      color: #f0efff;
+      font-size: 14px;
+      margin: 10px 0 17px;
+    }
+
+    .header-tag {
+      display: inline-block;
+      padding: 8px 13px;
+      border: 1px solid #ffffff75;
+      background: #ffffff15;
+      border-radius: 30px;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1.3px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 15px 10px 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 12px;
+      padding: 8px 11px;
+      border-radius: 20px;
+      background: #ffffff19;
+    }
+
+    nav a:hover {
+      background: #ffffff35;
+    }
+
+    main {
+      width: 100%;
+      max-width: 760px;
+      margin: auto;
+      padding: 22px 17px;
+    }
+
+    .welcome {
+      margin: 0 0 17px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .status-card {
+      background: linear-gradient(135deg, #eeeaff, #e6f2ff);
+      border: 1px solid #dedafa;
+      border-radius: 20px;
+      padding: 23px 21px;
+      margin-bottom: 27px;
+    }
+
+    .eyebrow {
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      margin: 0 0 12px;
+    }
+
+    .status-card h2 {
+      font-size: 23px;
+      margin: 0 0 10px;
+      line-height: 1.3;
+    }
+
+    .status-card p {
+      color: #65627e;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .status-pill {
+      display: inline-block;
+      background: white;
+      color: #6556b8;
+      border: 1px solid #ded8ff;
+      border-radius: 30px;
+      padding: 9px 12px;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .section-title {
+      font-size: 20px;
+      margin: 28px 0 14px;
+    }
+
+    .readings {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 11px;
+      margin-bottom: 25px;
+    }
+
+    .reading-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 16px 9px;
+      text-align: center;
+      box-shadow: 0 4px 15px #5445a309;
+      min-width: 0;
+    }
+
+    .reading-icon {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .reading-name {
+      display: block;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .reading-card strong {
+      display: block;
+      font-size: 25px;
+      color: var(--purple-dark);
+      margin: 12px 0 5px;
+    }
+
+    .reading-card small {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      margin: 17px 0;
+      box-shadow: 0 4px 16px #5445a308;
+      scroll-margin-top: 15px;
+    }
+
+    .panel h2 {
+      font-size: 18px;
+      margin: 0 0 10px;
+    }
+
+    .panel > p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .alert-symbol {
+      color: var(--purple);
+      margin-right: 5px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 17px 0 7px;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dcd8ef;
+      border-radius: 11px;
+      background: #fcfbff;
+      color: var(--text);
+      font: inherit;
+      font-size: 14px;
+    }
+
+    select:focus,
+    textarea:focus {
+      outline: 2px solid #b8b0ff;
+      border-color: var(--purple);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 11px;
+      color: white;
+      background: linear-gradient(100deg, var(--purple), var(--blue));
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      filter: brightness(1.05);
+    }
+
+    button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #9b90ff;
+      outline-offset: 3px;
+    }
+
+    #message {
+      font-size: 13px;
+      color: var(--purple-dark);
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .history-placeholder {
+      border: 1px dashed #c9c3ed;
+      border-radius: 12px;
+      background: #faf9ff;
+      text-align: center;
+      padding: 22px 12px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: #eae8fa;
+      color: #6b668f;
+      text-align: center;
+      padding: 24px 17px;
+      font-size: 12px;
+      line-height: 1.8;
+      margin-top: 25px;
+    }
+
+    footer strong {
+      color: var(--purple-dark);
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 400px) {
+      header {
+        padding: 27px 12px 23px;
+      }
+
+      .brand {
+        font-size: 23px;
+      }
+
+      main {
+        padding: 18px 12px;
+      }
+
+      .status-card {
+        padding: 19px 16px;
+      }
+
+      .reading-card {
+        padding: 14px 5px;
+      }
+
+      .reading-card strong {
+        font-size: 21px;
+      }
+
+      .reading-name {
+        font-size: 11px;
+      }
+
+      .panel {
+        padding: 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1 class="brand">
+      <span class="brand-icon">🍃</span>AIR AWARE
+    </h1>
+
+    <p>Cleaner air, healthier communities.</p>
+
+    <span class="header-tag">COMMUNITY AIR QUALITY</span>
+
+    <nav aria-label="Main navigation">
+      <a href="#dashboard">Dashboard</a>
+      <a href="#alerts">Alerts</a>
+      <a href="#reports">Reports</a>
+      <a href="#history">History</a>
+    </nav>
+  </header>
+
+  <main id="dashboard">
+    <p class="welcome">
+      Welcome to Air Aware. Stay informed about the air quality
+      in your community.
+    </p>
+
+    <section class="status-card" aria-labelledby="air-status">
+      <p class="eyebrow">CURRENT AIR QUALITY</p>
+      <h2 id="air-status">Awaiting sensor data</h2>
+      <p>
+        Your latest air quality readings will appear here
+        when the monitoring device is connected.
+      </p>
+      <span class="status-pill">● Device not connected</span>
+    </section>
+
+    <h2 class="section-title">Air Quality Readings</h2>
+
+    <section class="readings" aria-label="Current sensor readings">
+      <div class="reading-card">
+        <div class="reading-icon">☁️</div>
+        <span class="reading-name">PM2.5</span>
+        <strong>--</strong>
+        <small>µg/m³</small>
+      </div>
+
+      <div class="reading-card">
+        <div class="reading-icon">🌡️</div>
+        <span class="reading-name">Temperature</span>
+        <strong>--</strong>
+        <small>°C</small>
+      </div>
+
+      <div class="reading-card">
+        <div class="reading-icon">💧</div>
+        <span class="reading-name">Humidity</span>
+        <strong>--</strong>
+        <small>%</small>
+      </div>
+    </section>
+
+    <section class="panel" id="alerts">
+      <h2><span class="alert-symbol">⚠</span> Air Quality Alerts</h2>
+      <p>
+        No live alerts yet. Once the device is connected,
+        this section can display pollution warnings and
+        recommended precautions.
+      </p>
+    </section>
+
+    <section class="panel" id="reports">
+      <h2>📢 Community Reports</h2>
+      <p>
+        Notice possible air pollution in your community?
+        Submit a report to help document what you observed.
+      </p>
+
+      <form id="reportForm">
+        <label for="reportType">Type of report</label>
+        <select id="reportType" required>
+          <option value="">Choose a report type</option>
+          <option>Open burning</option>
+          <option>Smoke emissions</option>
+          <option>Heavy traffic</option>
+          <option>Unusual odor</option>
+          <option>Other</option>
+        </select>
+
+        <label for="details">Description</label>
+        <textarea
+          id="details"
+          placeholder="Describe what you observed..."
+          required
+        ></textarea>
+
+        <button type="submit">Submit Report</button>
+        <p id="message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="panel" id="history">
+      <h2>📈 Reading History</h2>
+      <div class="history-placeholder">
+        <div style="font-size: 25px; margin-bottom: 8px;">📊</div>
+        No readings recorded yet.<br>
+        Historical data will appear here after the device
+        begins sending readings.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>AIR AWARE</strong><br>
+    A cleaner, safer community starts with awareness.
+  </footer>
+
+  <script>
+    const reportForm = document.getElementById("reportForm");
+    const message = document.getElementById("message");
+
+    reportForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      message.textContent =
+        "Demo only: this report has not been saved or sent.";
+
+      reportForm.reset();
+    });
+  </script>
+</body>
+</html>
